@@ -116,9 +116,15 @@ export class ChatService {
       profilePicUrl: this.currentUser.photoURL,
       timestamp: serverTimestamp(),
       uid: this.currentUser?.uid,
-      text: textMessage || undefined,
-      imageUrl: imageUrl || undefined,
     };
+
+    if (textMessage) {
+      message.text = textMessage;
+    }
+
+    if (imageUrl) {
+      message.imageUrl = imageUrl;
+    }
 
     try {
       const newMessageRef = await addDoc(
